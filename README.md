@@ -12,7 +12,7 @@ de teste mais completos e que fazem mais sentido em projetos reais do mercado de
 trabalho.
 
 * 1.3 LEIAM com muita ATENÇÃO para não haver erro de interpretação.
-* 
+  
 * 1.4 O projeto mensal é de testes automatizados aplicados ao back-end. Então, a 
 implementação incorreta das regras de negócio refletirá na avaliação. Estarei observando
 sempre o back-end + testes.
@@ -71,9 +71,9 @@ relacionamento em cima das listas.
 ## STATUS DO ELEITOR
 
 * 3.1O Status não deverá ser enviado na requisição, mas sim processado pelo sistema.
-* 
+  
 * 3.2Os Status possíveis são: APTO, INATIVO, BLOQUEADO, PENDENTE e VOTOU.
-* 
+  
 * 3.3 INATIVO: Este status deverá ser atribuído quando houver requisição para deletar o eleitor.
 O sistema jamais deverá deletar de fato o eleitor, apenas mudar o status para
 INATIVO. Para isso, o método delete() do CRUD deverá ser
