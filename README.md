@@ -25,13 +25,13 @@ de front-end.
 ## 2 REGRAS DE NEGÓCIO SIMPLES: DADOS, RELACIONAMENTOS E VALIDATIONS
 (NAS ENTITIES):
 
-* 2.1O cadastro de um ELEITOR deverá conter nome completo (obrigatório), CPF válido (mas
+* 2.1 cadastro de um ELEITOR deverá conter nome completo (obrigatório), CPF válido (mas
 não obrigatório – pode ser nulo inicialmente), profissão (obrigatório), telefone celular
 válido (obrigatório), telefone fixo válido (mas não obrigatório), endereço de e-mail válido
 (mas não obrigatório – pode ser nulo inicialmente) e status (processado pelo sistema,
 conforme regras descritas no Item 3).
 
-* 2.2O cadastro de um CANDIDATO deverá conter nome completo (obrigatório), CPF válido
+* 2.2 cadastro de um CANDIDATO deverá conter nome completo (obrigatório), CPF válido
 (obrigatório), número do candidato (obrigatório e ÚNICO), função (campo obrigatório),
 status (processado pelo sistema, conforme regras descritas no Item 3) e votos apurados
 (transiente e calculado pelo sistema).
@@ -41,7 +41,7 @@ O campo de votos apurados é transiente, ou seja, não deverá ser persistido no
 pois será apenas calculado. Portanto, deverá ter a annotation @Transient em cima. Isso
 evitará a criação da coluna no banco.
 
-* 2.3O registro de um VOTO deverá conter data e hora da votação (campo obrigatório e obtido
+* 2.3 registro de um VOTO deverá conter data e hora da votação (campo obrigatório e obtido
 pelo sistema), o candidato a prefeito escolhido (objeto obrigatório), o candidato a vereador
 escolhido (objeto obrigatório) e um hash que será o comprovante (campo texto gerado
 pelo sistema, conforme regras descritas no Item 3).
@@ -55,7 +55,7 @@ relacionamento entre eleitor e voto.
 Não trataremos votos brancos e nulos. Então, os objetos dos candidatos são
 obrigatórios dentro do voto.
 
-* 2.4O sistema deverá ter uma classe de APURAÇÃO que não deverá ser persistida. Portanto,
+* 2.4 sistema deverá ter uma classe de APURAÇÃO que não deverá ser persistida. Portanto,
 é uma classe que não deverá ter annotation @Entity e não terá tabela no banco de dados.
 Ela servirá apenas para representar um objeto com o resultado das eleições que será
 totalmente calculado.
@@ -70,9 +70,9 @@ relacionamento em cima das listas.
 
 ## STATUS DO ELEITOR
 
-* 3.1O Status não deverá ser enviado na requisição, mas sim processado pelo sistema.
+* 3.1 Status não deverá ser enviado na requisição, mas sim processado pelo sistema.
   
-* 3.2Os Status possíveis são: APTO, INATIVO, BLOQUEADO, PENDENTE e VOTOU.
+* 3.2 Status possíveis são: APTO, INATIVO, BLOQUEADO, PENDENTE e VOTOU.
   
 * 3.3 INATIVO: Este status deverá ser atribuído quando houver requisição para deletar o eleitor.
 O sistema jamais deverá deletar de fato o eleitor, apenas mudar o status para
