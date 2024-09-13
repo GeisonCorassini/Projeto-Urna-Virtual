@@ -6,9 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,16 +25,20 @@ public class Voto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     private LocalDateTime dataHoraVotacao;
-    
-    private String Hash;
-    
+
+    @NotNull
+    private String hash;
+
     @ManyToOne
+    @NotNull(message = "Candidato a prefeito é obrigatório.")
     private Candidato candidatoPrefeito;
-    
+
     @ManyToOne
+    @NotNull(message = "Candidato a vereador é obrigatório.")
     private Candidato candidatoVereador;
-    
+
     @PrePersist
     public void gerarDataHoraEHash() {
         this.dataHoraVotacao = LocalDateTime.now();

@@ -1,11 +1,10 @@
 package com.Urna.service;
 
 import com.Urna.entity.Candidato;
+import com.Urna.entity.Candidato.StatusCandidato;
 import com.Urna.repository.CandidatoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class CandidatoService {
@@ -14,15 +13,10 @@ public class CandidatoService {
     private CandidatoRepository candidatoRepository;
 
     public Candidato salvarCandidato(Candidato candidato) {
+        if (candidato.getStatus() == null) {
+            candidato.setStatus(StatusCandidato.ATIVO);
+        }
         return candidatoRepository.save(candidato);
-    }
-
-    public Candidato buscarPorNumeroCandidato(String numeroCandidato) {
-        return candidatoRepository.findByNumeroCandidato(numeroCandidato);
-    }
-
-    public List<Candidato> listarCandidatosAtivos() {
-        return candidatoRepository.findByStatus("ATIVO");
     }
 
     public Candidato buscarPorId(Long id) {
@@ -32,13 +26,9 @@ public class CandidatoService {
     public void deletarCandidato(Long id) {
         Candidato candidato = candidatoRepository.findById(id).orElse(null);
         if (candidato != null) {
-            candidato.setStatus("INATIVO");
+            candidato.setStatus(StatusCandidato.INATIVO);
             candidatoRepository.save(candidato);
         }
     }
-    
-    public List<Candidato> listarCandidatosInativos() {
-        return candidatoRepository.findByStatus("INATIVO");
-    }
-
 }
+

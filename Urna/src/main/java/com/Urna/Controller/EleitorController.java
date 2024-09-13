@@ -49,4 +49,10 @@ public class EleitorController {
         eleitorService.deletarEleitor(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/votar/{id}")
+    public ResponseEntity<Void> votar(@PathVariable Long id) {
+        eleitorService.votar(id);
+        return ResponseEntity.noContent().build();
+    }
 }

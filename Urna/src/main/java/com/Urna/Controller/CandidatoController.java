@@ -18,7 +18,6 @@ public class CandidatoController {
 
     @PostMapping("/cadastrar")
     public ResponseEntity<Candidato> criarCandidato(@RequestBody Candidato candidato) {
-        candidato.setStatus("ATIVO");
         Candidato salvo = candidatoService.salvarCandidato(candidato);
         return new ResponseEntity<>(salvo, HttpStatus.CREATED);
     }
@@ -32,31 +31,9 @@ public class CandidatoController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/numero/{numeroCandidato}")
-    public ResponseEntity<Candidato> buscarCandidatoPorNumero(@PathVariable String numeroCandidato) {
-        Candidato candidato = candidatoService.buscarPorNumeroCandidato(numeroCandidato);
-        if (candidato != null && "ATIVO".equals(candidato.getStatus())) {
-            return new ResponseEntity<>(candidato, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-    @GetMapping("/ativos")
-    public ResponseEntity<List<Candidato>> listarCandidatosAtivos() {
-        List<Candidato> candidatos = candidatoService.listarCandidatosAtivos();
-        return new ResponseEntity<>(candidatos, HttpStatus.OK);
-    }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarCandidato(@PathVariable Long id) {
         candidatoService.deletarCandidato(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-    
-    @GetMapping("/inativos")
-    public ResponseEntity<List<Candidato>> listarCandidatosInativos() {
-        List<Candidato> candidatos = candidatoService.listarCandidatosInativos();
-        return new ResponseEntity<>(candidatos, HttpStatus.OK);
-    }
-
 }
