@@ -4,6 +4,7 @@ import com.Urna.entity.Eleitor;
 import com.Urna.repository.EleitorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,10 +16,13 @@ public class EleitorService {
     private EleitorRepository eleitorRepository;
 
     public Eleitor salvarEleitor(Eleitor eleitor) {
-        if (eleitor.getCpf() == null || eleitor.getEmail() == null) {
-            eleitor.setStatus(Eleitor.Status.PENDENTE);
-        } else {
-            eleitor.setStatus(Eleitor.Status.APTO);
+        // Verifica se o status do eleitor já foi definido e apenas inicializa se necessário
+        if (eleitor.getStatus() == null || Eleitor.Status.PENDENTE.equals(eleitor.getStatus())) {
+            if (eleitor.getCpf() == null || eleitor.getEmail() == null) {
+                eleitor.setStatus(Eleitor.Status.PENDENTE);
+            } else {
+                eleitor.setStatus(Eleitor.Status.APTO);
+            }
         }
         return eleitorRepository.save(eleitor);
     }
@@ -75,6 +79,7 @@ public class EleitorService {
         }
     }
 
+    @Transactional
     public void votar(Long id) {
         Optional<Eleitor> eleitorOptional = eleitorRepository.findById(id);
         if (eleitorOptional.isPresent()) {
